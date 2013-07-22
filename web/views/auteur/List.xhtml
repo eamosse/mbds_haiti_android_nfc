@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAuteurTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
+                <p:toolbar>  
+                    <p:toolbarGroup align="left">  
+                        <h:outputText value="#{bundle.ListAuteurTitle}"/>
+                    </p:toolbarGroup>  
+                    <p:toolbarGroup align="right">  
+                        <p:commandButton action="#{auteurController.prepareCreate}" icon="ui-icon-plus"/>
+                    </p:toolbarGroup>  
+                </p:toolbar> 
+                <h:outputText escape="false" value="#{bundle.ListAuteurEmpty}" rendered="#{auteurController.items.rowCount == 0}"/>
+                <p:dataTable value="#{auteurController.items}" var="item"
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  paginatorAlwaysVisible="false" rendered="#{auteurController.items.rowCount >0}" >
+                    <p:column headerText="#{bundle.ListAuteurTitle_id}">
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ListAuteurTitle_nom}">
+                        <h:outputText value="#{item.nom}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ListAuteurTitle_prenom}">
+                        <h:outputText value="#{item.prenom}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ListAuteurTitle_naissance}">
+                        <h:outputText value="#{item.naissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="#{bundle.ListAuteurTitle_photo}">
+                        <h:outputText value="#{item.photo}"/>
+                    </p:column>
+                    <p:column headerText="&nbsp;">
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <p:commandButton action="#{auteurController.prepareView}" icon="ui-icon-search"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton action="#{auteurController.prepareEdit}"  icon="ui-icon-pencil"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton action="#{auteurController.destroy}" icon="ui-icon-trash"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

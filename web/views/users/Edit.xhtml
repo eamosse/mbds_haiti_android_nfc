@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+            <h:form>
+                <p:toolbar>  
+                    <p:toolbarGroup align="left">  
+                        <h:outputText value="#{bundle.CreateUsersTitle}"/>
+                    </p:toolbarGroup>  
+
+                    <p:toolbarGroup align="right">  
+                        <p:commandButton action="#{usersController.create}" value="#{bundle.CreateUsersSaveLink}" />
+                        <p:commandButton action="#{usersController.prepareList}" value="#{bundle.CreateUsersShowAllLink}" immediate="true"/>
+                    </p:toolbarGroup>  
+
+                </p:toolbar>
+                <p:separator/>
+                <h:panelGrid columns="2">
+                    <p:inputText id="id" value="#{usersController.selected.id}" title="#{bundle.CreateUsersTitle_id}"  readonly="true"/>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateUsersLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{usersController.selected.nom}" title="#{bundle.CreateUsersTitle_nom}" >
+                            <p:watermark for="nom" value="#{bundle.CreateUsersTitle_nom}" />                   
+                        </p:inputText>
+                        <p:message for="nom" id="messagenom" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateUsersLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{usersController.selected.prenom}" title="#{bundle.CreateUsersTitle_prenom}" >
+                            <p:watermark for="prenom" value="#{bundle.CreateUsersTitle_prenom}" />                   
+                        </p:inputText>
+                        <p:message for="prenom" id="messageprenom" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateUsersLabel_adresse}" for="adresse" />
+                        <p:inputText id="adresse" value="#{usersController.selected.adresse}" title="#{bundle.CreateUsersTitle_adresse}" >
+                            <p:watermark for="adresse" value="#{bundle.CreateUsersTitle_adresse}" />                   
+                        </p:inputText>
+                        <p:message for="adresse" id="messageadresse" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateUsersLabel_genre}" for="genre" />
+                        <p:inputText id="genre" value="#{usersController.selected.genre}" title="#{bundle.CreateUsersTitle_genre}" >
+                            <p:watermark for="genre" value="#{bundle.CreateUsersTitle_genre}" />                   
+                        </p:inputText>
+                        <p:message for="genre" id="messagegenre" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateUsersLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{usersController.selected.username}" title="#{bundle.CreateUsersTitle_username}" >
+                            <p:watermark for="username" value="#{bundle.CreateUsersTitle_username}" />                   
+                        </p:inputText>
+                        <p:message for="username" id="messageusername" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateUsersLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.CreateUsersTitle_password}" >
+                            <p:watermark for="password" value="#{bundle.CreateUsersTitle_password}" />                   
+                        </p:inputText>
+                        <p:message for="password" id="messagepassword" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateUsersLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{usersController.selected.status}" title="#{bundle.CreateUsersTitle_status}" >
+                            <p:watermark for="status" value="#{bundle.CreateUsersTitle_status}" />                   
+                        </p:inputText>
+                        <p:message for="status" id="messagestatus" display="icon"/>  
+                    </h:panelGroup>
+                </h:panelGrid>
+                <p:separator/>
+                <h:panelGrid id="display" columns="3" cellpadding="4" style="margin:0 auto;">  
+                    <p:commandButton action="#{usersController.update}" value="#{bundle.CreateUsersSaveLink}" icon="ui-icon-disk" />
+                    <p:commandButton value="Annuler" onclick="confirmation.show()" type="button" icon="ui-icon-cancel" />
+                </h:panelGrid>
+
+                <p:confirmDialog id="confirmDialog" message="Etes vous sur de vouloir abandonner?"  
+                                 header="Annuler les modifications" severity="alert" widgetVar="confirmation">  
+                    <p:commandButton id="confirm" value="Oui" action="#{usersController.prepareList}" />  
+                    <p:commandButton id="decline" value="Non" onclick="confirmation.hide()" type="button" />   
+                </p:confirmDialog>  
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

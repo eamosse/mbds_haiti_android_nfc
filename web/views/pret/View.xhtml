@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPretTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+            <h:form>
+                <p:toolbar>  
+                    <p:toolbarGroup align="left">  
+                        <h:outputText value="#{bundle.ViewPretTitle}"/>
+                    </p:toolbarGroup>  
+
+                    <p:toolbarGroup align="right">  
+                        <p:commandButton action="#{pretController.prepareCreate}" value="#{bundle.ViewPretCreateLink}" icon="ui-icon-plus" />
+                        <p:commandButton action="#{pretController.prepareList}" value="#{bundle.CreatePretShowAllLink}" immediate="true"/>
+                        <p:commandButton action="#{pretController.destroyAndView}" value="#{bundle.ViewPretDestroyLink}" icon="ui-icon-trash"/>
+                    </p:toolbarGroup>  
+
+                </p:toolbar>
+                <p:separator/>
+
+                <div id="show-frequency" class="content scaffold-show" role="main">
+                    <ol class="property-list Pret">
+                        <li class="fieldcontain">
+                            <h:outputText id="id-label" class="property-label" value="#{bundle.ViewPretLabel_id}"/>
+                            <h:outputText class="property-value"  value="#{pretController.selected.id}" title="#{bundle.ViewPretTitle_id}"/>
+                        </li>
+                        <li class="fieldcontain">
+                            <h:outputText id="livre-label" class="property-label" value="#{bundle.ViewPretLabel_livre}"/>
+                            <h:outputText class="property-value"  value="#{pretController.selected.livre}" title="#{bundle.ViewPretTitle_livre}"/>
+                        </li>
+                        <li class="fieldcontain">
+                            <h:outputText id="etudiant-label" class="property-label" value="#{bundle.ViewPretLabel_etudiant}"/>
+                            <h:outputText class="property-value" value="#{pretController.selected.etudiant}" title="#{bundle.ViewPretTitle_etudiant}"/>
+                        </li>
+                        <li class="fieldcontain">
+                            <h:outputText id="user-label" class="property-label" value="#{bundle.ViewPretLabel_user}"/>
+                            <h:outputText class="property-value"  value="#{pretController.selected.user}" title="#{bundle.ViewPretTitle_user}"/>
+                        </li>
+                        <li class="fieldcontain">
+                            <h:outputText id="debut-label" class="property-label" value="#{bundle.ViewPretLabel_debut}"/>
+                            <h:outputText class="property-value"  value="#{pretController.selected.debut}" title="#{bundle.ViewPretTitle_debut}"/>
+                        </li>
+                        <li class="fieldcontain">
+                            <h:outputText id="fin-label" class="property-label" value="#{bundle.ViewPretLabel_fin}"/>
+                            <h:outputText class="property-value"  value="#{pretController.selected.fin}" title="#{bundle.ViewPretTitle_fin}"/>
+                        </li>
+                    </ol>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

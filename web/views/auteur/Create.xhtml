@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAuteurTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="style">
+            <link rel="stylesheet" href="#{request.contextPath}/resources/css/jquery.fileupload-ui.css"/>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+            <h:form id="form">
+                <p:toolbar>  
+                    <p:toolbarGroup align="left">  
+                        <h:outputText value="#{bundle.CreateAuteurTitle}"/>
+                    </p:toolbarGroup>  
+
+                    <p:toolbarGroup align="right">  
+                        <p:commandButton action="#{auteurController.create}" value="#{bundle.CreateAuteurSaveLink}" />
+                        <p:commandButton action="#{auteurController.prepareList}" value="#{bundle.CreateAuteurShowAllLink}" immediate="true"/>
+                    </p:toolbarGroup>  
+
+                </p:toolbar>
+                <p:separator/>
+                <h:panelGrid columns="2">
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateAuteurLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{auteurController.selected.nom}" title="#{bundle.CreateAuteurTitle_nom}" >
+                            <p:watermark for="nom" value="#{bundle.CreateAuteurTitle_nom}" />
+                        </p:inputText>
+                        <p:message for="nom" id="messagenom" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateAuteurLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{auteurController.selected.prenom}" title="#{bundle.CreateAuteurTitle_prenom}" >
+                            <p:watermark for="prenom" value="#{bundle.CreateAuteurTitle_prenom}" />
+                        </p:inputText>
+                        <p:message for="prenom" id="messageprenom" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateAuteurLabel_naissance}" for="naissance" />
+                        <p:calendar  pattern="dd/MM/yyyy" mode="popup" id="naissance" value="#{auteurController.selected.naissance}" title="#{bundle.CreateAuteurTitle_naissance}" >
+                        </p:calendar>
+                        <p:message for="naissance" id="messagenaissance" display="icon"/>  
+                    </h:panelGroup>
+                    <h:panelGroup class="fieldcontain">
+                        <h:outputLabel value="#{bundle.CreateAuteurLabel_photo}" for="photo" />
+                        <div class="large-4 columns" style="margin-right: 20px">
+                            <img id="img" class="circular"  src="#{request.contextPath}#{auteurController.selected.photo}" alt="default image"/>
+                            <h:inputHidden id="photo" value="#{auteurController.selected.photo}"/>
+                        </div>
+                        <span class="btn btn-success fileinput-button">
+                            <i class="icon-plus icon-white"></i>
+                            <span>Upload an icon</span>
+                            <input id="fileupload" type="file" name="files[]" data-url="#{request.contextPath}/upload"/>
+                        </span> 
+                        <p:message for="photo" id="messagephoto" display="icon"/>  
+                    </h:panelGroup>
+                </h:panelGrid>
+                <p:separator/>
+                <h:panelGrid id="display" columns="3" cellpadding="4" style="margin:0 auto;">  
+                    <p:commandButton action="#{auteurController.create}" value="#{bundle.CreateAuteurSaveLink}" icon="ui-icon-disk" />
+                    <p:commandButton value="Annuler" onclick="confirmation.show()" type="button" icon="ui-icon-cancel" />
+                </h:panelGrid>
+
+                <p:confirmDialog id="confirmDialog" message="Etes vous sur de vouloir abandonner?"  
+                                 header="Annuler les modifications" severity="alert" widgetVar="confirmation">  
+                    <p:commandButton id="confirm" value="Oui" action="#{auteurController.prepareList}" />  
+                    <p:commandButton id="decline" value="Non" onclick="confirmation.hide()" type="button" />   
+                </p:confirmDialog>  
+            </h:form>
+            <script src="#{request.contextPath}/js/vendor/jquery.ui.widget.js"></script>
+            <script src="#{request.contextPath}/js/bootstrap.min.js"></script>
+            <script src="#{request.contextPath}/js/jquery.iframe-transport.js"></script>
+            <script src="#{request.contextPath}/js/jquery.fileupload.js"></script>
+            <script src="#{request.contextPath}/js/upload.js"></script>
+          
+        </ui:define>
+    </ui:composition>
+
+</html>
